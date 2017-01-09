@@ -1,0 +1,1 @@
+MySql client library for Node JS (Node C/C++ Addon )
