@@ -4,7 +4,9 @@
 #include <mysql.h>
 #include <node.h>
 #include "common.h"
+#include <cstring>
 
+#ifd
 
 namespace NodeSql {
 
@@ -262,7 +264,7 @@ namespace NodeSql {
 
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "mysql_init() failed(probably out of memory)")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 
@@ -277,7 +279,7 @@ namespace NodeSql {
 			{
 				isolate->ThrowException(Exception::TypeError(
 					String::NewFromUtf8(isolate, get_mysql_Error(conn).c_str())));
-				args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+				args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 				return;
 			}
 
@@ -285,12 +287,12 @@ namespace NodeSql {
 		else {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Your Mysql Verrsion must be higher than 3.22")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 
 		}
 		NodeMysql::instance->connection = conn;
-		args.GetReturnValue().Set(v8::Boolean::New(isolate, TRUE));
+		args.GetReturnValue().Set(v8::Boolean::New(isolate, true));
 	}
 
 	void NodeMysql::do_mysqlQuery(const FunctionCallbackInfo<Value>& args) {
@@ -299,14 +301,14 @@ namespace NodeSql {
 		if (args.Length() < 1 || args[0]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "You must enter Mysql Query")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 
 		std::string query = std::string(*v8::String::Utf8Value(args[0]->ToString()));
 
 		if (mysql_query(NodeMysql::instance->connection, query.c_str()) != 0) {
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 	}
@@ -323,7 +325,7 @@ namespace NodeSql {
 
 				isolate->ThrowException(Exception::TypeError(
 					String::NewFromUtf8(isolate, get_mysql_Error(NodeMysql::instance->connection).c_str())));
-				args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+				args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 
 			}
 			else {
@@ -346,7 +348,7 @@ namespace NodeSql {
 		Local<Array> arra = NodeMysql::instance->get_mysql_fetch_data(isolate);
 
 		if (mysql_errno(NodeMysql::instance->connection) != 0) {
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 
@@ -364,8 +366,7 @@ namespace NodeSql {
 		MYSQL_RES *res_set = NodeMysql::instance->res_set;
 		unsigned int i, a = 0;
 		my_ulonglong row_num = mysql_num_rows(res_set);
-		unsigned int num_fields = mysql_num_fields(res_set);
-
+		
 		v8::Local<v8::Array> arra = Array::New(isolate, (int)row_num);
 		NodeMysql::instance->fetch_lengths = Array::New(isolate, (int)row_num);
 		v8::Local<v8::Object> obj;
@@ -415,11 +416,11 @@ namespace NodeSql {
 		my_bool auCommit = mysql_autocommit(NodeMysql::instance->connection, (int)mode);
 
 		if (auCommit == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
 
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 
 	}
 
@@ -437,10 +438,10 @@ namespace NodeSql {
 		int ping = mysql_ping(NodeMysql::instance->connection);
 
 		if (ping == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 	}
 
 	void NodeMysql::do_mysql_affected_rows(const FunctionCallbackInfo<Value> &args) {
@@ -450,7 +451,7 @@ namespace NodeSql {
 
 
 		if (affected_rows == (my_ulonglong)~0) {
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		args.GetReturnValue().Set(v8::String::NewFromUtf8(isolate, rows_str_cpp.c_str()));
@@ -471,10 +472,10 @@ namespace NodeSql {
 		my_bool commit = mysql_commit(NodeMysql::instance->connection);
 
 		if (commit != 0) {
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
-		args.GetReturnValue().Set(v8::Boolean::New(isolate, TRUE));
+		args.GetReturnValue().Set(v8::Boolean::New(isolate, true));
 
 	}
 
@@ -515,10 +516,10 @@ namespace NodeSql {
 		int debufInfo = mysql_dump_debug_info(NodeMysql::instance->connection);
 
 		if (debufInfo != 0) {
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
-		args.GetReturnValue().Set(v8::Boolean::New(isolate, TRUE));
+		args.GetReturnValue().Set(v8::Boolean::New(isolate, true));
 	}
 
 	void NodeMysql::do_mysql_errno(const FunctionCallbackInfo<Value> &args) {
@@ -627,7 +628,6 @@ namespace NodeSql {
 	}
 
 	void NodeMysql::do_mysql_get_client_version(const FunctionCallbackInfo<Value> &args) {
-		Isolate *isolate = args.GetIsolate();
 		unsigned int client_info = mysql_get_client_version();
 		args.GetReturnValue().Set(client_info);
 	}
@@ -645,7 +645,6 @@ namespace NodeSql {
 	}
 
 	void NodeMysql::do_mysql_get_proto_info(const FunctionCallbackInfo<Value> &args) {
-		Isolate *isolate = args.GetIsolate();
 		unsigned int proto_info = mysql_get_proto_info(NodeMysql::instance->connection);
 		args.GetReturnValue().Set(proto_info);
 	}
@@ -683,15 +682,14 @@ namespace NodeSql {
 	}
 
 	void NodeMysql::do_mysql_more_results(const FunctionCallbackInfo<Value> &args) {
-		Isolate *isolate = args.GetIsolate();
 
 		my_bool moreResult = mysql_more_results(NodeMysql::instance->connection);
 
 		if (moreResult == 1) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 		}
 		else {
-			args.GetReturnValue().Set(FALSE);
+			args.GetReturnValue().Set(false);
 		}
 
 
@@ -704,7 +702,7 @@ namespace NodeSql {
 		if (args.Length() < 1 || args[0]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "You must enter Mysql Query")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 
@@ -712,16 +710,15 @@ namespace NodeSql {
 		int res = mysql_real_query(NodeMysql::instance->connection, query.c_str(), strlen(query.c_str()));
 
 		if (res == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 	}
 
 	void NodeMysql::do_mysql_multiple_statement(const FunctionCallbackInfo<Value> &args) {
 
 		Isolate *isolate = args.GetIsolate();
-		MYSQL_RES *result;
 		Local<Array> multiple_result = Array::New(isolate);
 		unsigned int a = 0;
 		int status;
@@ -772,10 +769,10 @@ namespace NodeSql {
 		int relode = mysql_reload(NodeMysql::instance->connection);
 
 		if (relode == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 	}
 
 
@@ -783,10 +780,10 @@ namespace NodeSql {
 		int relode = mysql_rollback(NodeMysql::instance->connection);
 
 		if (relode == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 	}
 	void NodeMysql::do_mysql_select_db(const FunctionCallbackInfo<Value> &args) {
 
@@ -795,7 +792,7 @@ namespace NodeSql {
 		if (args.Length() < 1 || args[0]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "You must add Database name")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 
@@ -804,23 +801,25 @@ namespace NodeSql {
 		int sDb = mysql_select_db(NodeMysql::instance->connection, db.c_str());
 
 		if (sDb == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 
 
 	}
 
 	void NodeMysql::do_mysql_reset_connection(const FunctionCallbackInfo<Value> &args) {
+
 		int relode = mysql_reset_connection(NodeMysql::instance->connection);
 
 		if (relode == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 	}
+
 
 	void NodeMysql::do_mysql_set_local_infile_default(const FunctionCallbackInfo<Value> &args) {
 		mysql_set_local_infile_default(NodeMysql::instance->connection);
@@ -839,38 +838,38 @@ namespace NodeSql {
 		if (args.Length() < 5) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Wrong Number of arguments")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 
 		if (!args[0]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid path name to the key file")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		if (!args[1]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid  path name to the certificate file")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		if (!args[2]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid path name to the certificate authority file")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		if (!args[3]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid path name to a directory that contains trusted SSL CA certificates in PEM format")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		if (!args[4]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid list of permissible ciphers to use for SSL encryption")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		std::string key = std::string(*v8::String::Utf8Value(args[0]->ToString()));
@@ -884,10 +883,10 @@ namespace NodeSql {
 
 
 		if (ssl_set == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 
 	}
 
@@ -897,26 +896,26 @@ namespace NodeSql {
 		if (args.Length() < 3) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Wrong Number of arguments")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 			return;
 		}
 
 		if (!args[0]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid Username")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		if (!args[1]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid  Password")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		if (!args[2]->IsUndefined()) {
 			isolate->ThrowException(Exception::TypeError(
 				String::NewFromUtf8(isolate, "Invalid Database name")));
-			args.GetReturnValue().Set(v8::Boolean::New(isolate, FALSE));
+			args.GetReturnValue().Set(v8::Boolean::New(isolate, false));
 		}
 
 		std::string username = std::string(*v8::String::Utf8Value(args[0]->ToString()));
@@ -928,10 +927,10 @@ namespace NodeSql {
 
 
 		if (ssl_set == 0) {
-			args.GetReturnValue().Set(TRUE);
+			args.GetReturnValue().Set(true);
 			return;
 		}
-		args.GetReturnValue().Set(FALSE);
+		args.GetReturnValue().Set(false);
 	}
 
 	void NodeMysql::do_mysql_stat(const FunctionCallbackInfo<Value> &args) {
@@ -950,13 +949,13 @@ namespace NodeSql {
 		MYSQL_RES *resSet = mysql_use_result(NodeMysql::instance->connection);
 
 		if (resSet == NULL) {
-			args.GetReturnValue().Set(FALSE);
+			args.GetReturnValue().Set(false);
 			return;
 		}
 
 		NodeMysql::instance->res_set = resSet;
 
-		args.GetReturnValue().Set(TRUE);
+		args.GetReturnValue().Set(true);
 	}
 
 	void NodeMysql::do_mysql_free_result(const FunctionCallbackInfo<Value> &args) {
