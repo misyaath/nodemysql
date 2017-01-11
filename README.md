@@ -4,6 +4,8 @@
 
 - [Install](#install)
 - [Introduction](#introduction)
+- [Establishing connections](#establishing-connections)
+- [Connection options](#connection-options)
 
 
 
@@ -26,7 +28,7 @@ Here is an example on how to use it:
 var mysql      = require('nodemysql');
 var db = mysql.connect({
   host     : '127.0.0.1',
-  user     : 'username',
+  username : 'username',
   password : 'password',
   database : 'database name'
 });
@@ -43,3 +45,40 @@ for(var i=0; i< result.length; i++){
 db.mysql_free_result();
 db.mysql_close();
 ```
+
+
+## Establishing connections
+
+The recommended way to establish a connection is this:
+
+```js
+
+var mysql      = require('nodemysql');
+var db = mysql.connect({
+  host     : '127.0.0.1',
+  username : 'username',
+  password : 'password',
+  database : 'database name'
+  port     : 3306,
+  socket   : "tcp"
+  falg     : 0,
+});
+
+console.log("Error: " + db.mysql_error() + " Error No: " + mysql_errno())
+
+```
+## Connection options
+
+When establishing a connection, you can set the following options:
+
+* `host`: The hostname of the database you are connecting to. (Default:
+  `localhost` for Linux generic "127.0.0.1")
+* `port`: The port number to connect to. (Default: `3306`)(Optional),
+* `socket`: The source IP address to use for TCP connection. (Optional)
+* `username`: The MySQL user to authenticate as.
+* `password`: The password of that MySQL user.
+* `database`: Name of the database to use for this connection (Optional).
+* `flags`: List of connection flags to use other than the default ones. It is
+  also possible to blacklist default ones. For more information, check
+  [Connection Flags](#connection-flags).
+
