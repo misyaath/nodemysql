@@ -145,3 +145,49 @@ Description
 mysql_affected_rows() may be called immediately after executing a statement with mysql_query() or mysql_real_query(). It returns the number of rows changed, deleted, or inserted by the last statement if it was an UPDATE, DELETE, or INSERT. For SELECT statements, mysql_affected_rows() works like mysql_num_rows(). Further [mysql_affected_rows](#https://dev.mysql.com/doc/refman/5.7/en/mysql-affected-rows.html)
 
 
+## mysql_autocommit()
+
+```js
+db.mysql_autocommit(int mode)
+```
+
+Description
+
+Sets autocommit mode on if mode is 1, off if mode is 0. Further [mysql_autocommit](#https://dev.mysql.com/doc/refman/5.7/en/mysql-autocommit.html)
+
+Return Values
+
+true for success. false if an error occurred.
+
+
+## mysql_change_user()
+
+```js
+bool =  db.mysql_change_user(MYSQL *mysql, const char *user, const char *password, const char *db);
+```
+
+Description
+
+Changes the user and causes the database specified by db to become the default (current) database on the connection specified by mysql. In subsequent queries, this database is the default for table references that include no explicit database specifier.
+
+mysql_change_user() fails if the connected user cannot be authenticated or does not have permission to use the database. In this case, the user and database are not changed. Further [mysql_change_user](#https://dev.mysql.com/doc/refman/5.7/en/mysql-change-user.html)
+
+Return Values
+
+true for success. false if an error occurred.
+
+## mysql_character_set_name()
+
+```js
+string = db.mysql_character_set_name();
+```
+Description
+
+Returns the default character set name for the current connection. Further[mysql_character_set_name](#https://dev.mysql.com/doc/refman/5.7/en/mysql-character-set-name.html)
+
+Return Values
+
+The default character set name
+
+
+
