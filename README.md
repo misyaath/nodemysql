@@ -260,7 +260,95 @@ Return Values
 
 None.
 
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-debug.html
 
+## mysql_dump_debug_info()
+
+```js
+bool db.mysql_dump_debug_info()
+```
+
+Description
+
+Instructs the server to write debugging information to the error log. The connected user must have the SUPER privilege.
+
+Return Values
+
+True for success. False if an error occurred.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-dump-debug-info.html
+
+## mysql_errno()
+
+```js
+int db.mysql_errno()
+```
+Description
+
+For the connection specified by mysql, mysql_errno() returns the error code for the most recently invoked API function that can succeed or fail. A return value of zero means that no error occurred. Client error message numbers are listed in the MySQL errmsg.h header file. Server error message numbers are listed in mysqld_error.h. Errors also are listed at Appendix B, Errors, Error Codes, and Common Problems.
+
+
+Return Values
+
+An error code value for the last mysql_xxx() call, if it failed. zero means no error occurred.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-errno.html
+
+## mysql_error()
+
+```js
+string db.mysql_error()
+```
+
+Description
+
+For the connection specified by mysql, mysql_error() returns a string containing the error message for the most recently invoked API function that failed. If a function did not fail, the return value of mysql_error() may be the previous error or an empty string to indicate no error.
+
+A rule of thumb is that all functions that have to ask the server for information reset mysql_error() if they succeed.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-error.html
+
+## mysql_fetch_field()
+
+```js
+
+db.mysql_real_query("SELECT * FROM table");
+var res = db.mysql_store_result();
+var field = db.mysql_fetch_field()
+
+for (var i = 0; i < field.length; i++) {
+
+    console.log(field[i].type);
+    console.log(field[i].org_name);
+    console.log(field[i].table);
+    console.log(field[i].org_table);
+    console.log(field[i].db);
+    console.log(field[i].catalog);
+    console.log(field[i].length);
+    console.log(field[i].max_length);
+    console.log(field[i].name_length);
+    console.log(field[i].org_name_length);
+    console.log(field[i].table_length);
+    console.log(field[i].org_table_length);
+    console.log(field[i].db_length);
+    console.log(field[i].catalog_length);
+    console.log(field[i].charsetnr);
+    console.log(field[i].type);
+    
+}
+
+```
+
+Description
+
+mysql_fetch_field() is reset to return information about the first field each time you execute a new SELECT query. The field returned by mysql_fetch_field() is also affected by calls to mysql_field_seek().
+
+
+Return Values
+
+The array for the current column.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-fetch-field.html
 
 
 
