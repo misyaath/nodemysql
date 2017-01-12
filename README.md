@@ -37,7 +37,18 @@
   - [mysql_insert_id()](#mysql_insert_id())
   - [mysql_more_results()](#mysql_more_results())
   - [mysql_num_fields()](#mysql_num_fields())
-  -[mysql_num_rows()](#mysql_num_rows())
+  - [mysql_num_rows()](#mysql_num_rows())
+  - [mysql_real_query()](#mysql_real_query())
+  - [mysql_reload()](#mysql_reload())
+  - [mysql_reset_connection()](#mysql_reset_connection())
+  - [mysql_rollback()](#mysql_rollback())
+  - [mysql_select_db()](#mysql_select_db())
+  - [mysql_set_local_infile_default()](#mysql_set_local_infile_default())
+  - [mysql_sqlstate()](#mysql_sqlstate())
+  - [mysql_ssl_set()](#mysql_ssl_set())
+  - [mysql_stat()](#mysql_stat())
+  - [mysql_use_result()](#mysql_use_result())
+  
 
 
 
