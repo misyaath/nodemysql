@@ -17,6 +17,11 @@
   - [mysql_affected_rows()](#mysql_affected_rows())
   - [mysql_character_set_name()](#mysql_character_set_name())
   - [mysql_commit()](#mysql_commit())
+  - [mysql_data_seek()](#mysql_data_seek())
+  - [mysql_debug()](#mysql_debug())
+  - [mysql_dump_debug_info()](#mysql_dump_debug_info())
+  - [mysql_errno()](#mysql_errno())
+  - [mysql_error()](#mysql_error())
 
 
 
