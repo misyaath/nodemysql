@@ -132,3 +132,4 @@ When establishing a connection, you can set the following options:
   also possible to blacklist default ones. For more information, check
   [Connection Flags](#connection-flags).
 
+## Function Descriptions
