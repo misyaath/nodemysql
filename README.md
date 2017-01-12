@@ -731,3 +731,90 @@ Executes the SQL statement pointed to by stmt_str, a string length bytes long. N
 
 See https://dev.mysql.com/doc/refman/5.7/en/mysql-real-query.html
 
+## mysql_reload()
+
+```js
+db.mysql_reload();
+```
+
+Description
+
+Asks the MySQL server to reload the grant tables. The connected user must have the RELOAD privilege.
+
+This function is deprecated. It is preferable to use mysql_query() to issue an SQL FLUSH PRIVILEGES statement instead.
+
+Return Values
+
+True for success. False if an error occurred.
+
+## mysql_reset_connection()
+
+```js
+db.mysql_reset_connection()
+```
+Description
+
+Resets the connection to clear the session state. This function was added in MySQL 5.7.3.
+
+mysql_reset_connection() has effects similar to mysql_change_user() or an auto-reconnect except that the connection is not closed and reopened, and reauthentication is not done. 
+
+The connection-related state is affected as follows:
+
+- Any active transactions are rolled back and autocommit mode is reset.
+- All table locks are released.
+- All TEMPORARY tables are closed (and dropped).
+- Session system variables are reinitialized to the values of the corresponding global system variables, including system variables that are set implicitly by statements such as SET NAMES.
+- User variable settings are lost.
+- Prepared statements are released.
+- HANDLER variables are closed.
+- The value of LAST_INSERT_ID() is reset to 0.
+- Locks acquired with GET_LOCK() are released.
+
+Return Values
+
+True for success. False if an error occurred.
+
+## mysql_rollback()
+
+```js
+ ........................
+ 
+db.mysql_autocommit(0);   // set autocommit to false
+ 
+db.mysql_query(my, "TRUNCATE TABLE `collection`;");
+db.mysql_query(my, "INSERT INTO `test`.`collection`"
+	        " (`id`, `name`, `title`, `published`)"
+		" VALUES (NULL, 'Debian', 'Debian 4.0', '2011-02-14');");
+db.mysql_query(my, "SELECT * from collection WHERE 1;");
+ 
+if (db.mysql_affected_rows(my) >= 1) {
+   db.mysql_rollback(my);
+}
+else {
+   db.mysql_commit(my);
+}
+
+..........
+```
+
+Description
+
+Rolls back the current transaction.
+
+Return Values
+
+True for success. False if an error occurred.
+
+## mysql_sqlstate()
+
+```js
+var state = db.mysql_sqlstate();
+```
+
+Description
+
+Returns a null-terminated string containing the SQLSTATE error code for the most recently executed SQL statement. The error code consists of five characters. '00000' means “no error.” The values are specified by ANSI SQL and ODBC. For a list of possible values
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-sqlstate.html
+
+
