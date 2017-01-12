@@ -22,6 +22,16 @@
   - [mysql_dump_debug_info()](#mysql_dump_debug_info())
   - [mysql_errno()](#mysql_errno())
   - [mysql_error()](#mysql_error())
+  - [mysql_fetch_field()](#mysql_fetch_field())
+  - [mysql_fetch_field_direct()](#mysql_fetch_field_direct())
+  - [mysql_fetch_fields()](#mysql_fetch_fields())
+  - [mysql_field_count()](#mysql_field_count())
+  - [mysql_get_character_set_info()](#mysql_get_character_set_info())
+  - [mysql_get_client_info()](#mysql_get_client_info())
+  - [mysql_get_client_version()](#mysql_get_client_version())
+  - [mysql_get_host_info()](#mysql_get_host_info())
+  - [mysql_get_proto_info()](#mysql_get_proto_info())
+  - [mysql_get_server_info()](#mysql_get_server_info())
 
 
 
