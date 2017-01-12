@@ -318,7 +318,6 @@ var field = db.mysql_fetch_field()
 
 for (var i = 0; i < field.length; i++) {
 
-    console.log(field[i].type);
     console.log(field[i].org_name);
     console.log(field[i].table);
     console.log(field[i].org_table);
@@ -341,6 +340,69 @@ for (var i = 0; i < field.length; i++) {
 
 Description
 
+Returns an array of all MYSQL_FIELD structures for a result set. Each structure provides the field definition for one column of the result set.
+
+Return Values
+
+An array of array for all columns of a result set.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-fetch-fields.html
+
+
+
+## mysql_fetch_field_direct()
+
+```js
+
+db.mysql_real_query("SELECT * FROM pet");
+var res = db.mysql_store_result();
+var field = db.mysql_fetch_field_direct(5)
+
+console.log(field.name);
+
+```
+
+Description
+
+Given a field number fieldnr for a column within a result set, returns that column's field definition as a MYSQL_FIELD structure. Use this function to retrieve the definition for an arbitrary column. Specify a value for fieldnr in the range from 0 to mysql_num_fields(result)-1.
+
+Return Values
+
+The JSON object for the specified column.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-fetch-field-direct.html
+
+## mysql_fetch_fields()
+
+```js
+
+db.mysql_real_query("SELECT * FROM table");
+var res = db.mysql_store_result();
+var field = db.mysql_fetch_fields()
+
+
+    console.log(field[i].org_name);
+    console.log(field[i].table);
+    console.log(field[i].org_table);
+    console.log(field[i].db);
+    console.log(field[i].catalog);
+    console.log(field[i].length);
+    console.log(field[i].max_length);
+    console.log(field[i].name_length);
+    console.log(field[i].org_name_length);
+    console.log(field[i].table_length);
+    console.log(field[i].org_table_length);
+    console.log(field[i].db_length);
+    console.log(field[i].catalog_length);
+    console.log(field[i].charsetnr);
+    console.log(field[i].type);
+  
+
+```
+
+
+Description
+
 mysql_fetch_field() is reset to return information about the first field each time you execute a new SELECT query. The field returned by mysql_fetch_field() is also affected by calls to mysql_field_seek().
 
 
@@ -349,6 +411,8 @@ Return Values
 The array for the current column.
 
 See https://dev.mysql.com/doc/refman/5.7/en/mysql-fetch-field.html
+
+
 
 
 
