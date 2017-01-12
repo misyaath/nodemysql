@@ -166,7 +166,7 @@ true for success. false if an error occurred.
 ## mysql_change_user()
 
 ```js
-bool =  db.mysql_change_user(MYSQL *mysql, const char *user, const char *password, const char *db);
+bool =  db.mysql_change_user(user,password,db);
 ```
 
 Description
@@ -193,6 +193,74 @@ See https://dev.mysql.com/doc/refman/5.7/en/mysql-character-set-name.html
 Return Values
 
 The default character set name
+
+## mysql_close()
+
+```js
+void db.mysql_close()
+```
+
+Description
+
+Closes a previously opened connection. mysql_close() also deallocates the connection handle pointed to by mysql if the handle was allocated automatically by mysql_init() or mysql_connect().
+
+Return Values
+
+None.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-close.html
+
+## mysql_commit()
+
+```js
+boll =  db.mysql_commit()
+```
+
+Description
+
+Commits the current transaction.
+
+The action of this function is subject to the value of the completion_type system variable. In particular, if the value of completion_type is RELEASE (or 2), the server performs a release after terminating a transaction and closes the client connection. Call mysql_close() from the client program to close the connection from the client side.
+
+Return Values
+
+True for success. False if an error occurred.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-commit.html
+
+## mysql_data_seek()
+
+```js
+void db.mysql_data_seek(int offset)
+```
+
+Description
+
+Seeks to an arbitrary row in a query result set. The offset value is a row number. Specify a value in the range from 0 to mysql_num_rows(result)-1.
+
+This function requires that the result set structure contains the entire result of the query, so mysql_data_seek() may be used only in conjunction with mysql_store_result(), not with mysql_use_result().
+
+Return Values
+
+None.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-data-seek.html
+
+## mysql_debug()
+
+```js
+void db.mysql_debug("d:t:O,/tmp/client.trace");
+```
+
+Description
+
+Does a DBUG_PUSH with the given string. mysql_debug() uses the Fred Fish debug library. To use this function, you must compile the client library to support debugging. See Section 27.5.3, “The DBUG Package”.
+
+Return Values
+
+None.
+
+
 
 
 
