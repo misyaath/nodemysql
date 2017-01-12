@@ -413,6 +413,59 @@ The array for the current column.
 See https://dev.mysql.com/doc/refman/5.7/en/mysql-fetch-field.html
 
 
+## mysql_fetch_lengths()
+
+```js
+db.mysql_real_query("SELECT * FROM pet");
+var res = db.mysql_store_result();
+var row = db.mysql_fetch_row();
+var field = db.mysql_fetch_lengths()
+
+console.log(field);
+
+
+for (var i = 0; i < field.length; i++) {
+
+    console.log(field[i].fieldname);
+
+}
+
+```
+Description
+
+Returns the lengths of the columns of the current row within a result set. If you plan to copy field values, this length information is also useful for optimization, 
+
+Return Values
+
+An array of integers representing the size of each column (not including any terminating null bytes). NULL if an error occurred.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-fetch-lengths.html
+
+
+## mysql_fetch_row()
+
+```js
+
+db.mysql_real_query("SELECT * FROM pet");
+var res = db.mysql_store_result();
+var row = db.mysql_fetch_row();
+
+for (var i = 0; i < field.length; i++) {
+
+ console.log(field[i].fieldname);
+
+}
+
+
+```
+Description
+
+Retrieves the row of a result set. 
+
+Return Values
+
+A array structure for the row. NULL if there are no more rows to retrieve or if an error occurred.
+
 
 
 
