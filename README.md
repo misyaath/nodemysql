@@ -7,7 +7,16 @@
 - [Establishing connections](#establishing-connections)
 - [Connection options](#connection-options)
 - [Function Descriptions](#function-descriptions)
-  - [mysql_affected_rows()](mysql_affected_rows())
+  - [mysql_affected_rows()](#mysql_affected_rows())
+  - [mysql_real_connect()](#mysql_real_connect())
+  - [mysql_close()](#mysql_close())
+  - [mysql_query()](#mysql_query())
+  - [mysql_store_result()](#mysql_store_result())
+  - [mysql_free_result()](#mysql_free_result())
+  - [mysql_fetch_row()](#mysql_fetch_row())
+  - [mysql_affected_rows()](#mysql_affected_rows())
+  - [mysql_character_set_name()](#mysql_character_set_name())
+  - [mysql_commit()](#mysql_commit())
 
 
 
