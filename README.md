@@ -133,3 +133,5 @@ When establishing a connection, you can set the following options:
   [Connection Flags](#connection-flags).
 
 ## Function Descriptions
+
+ ## mysql_affected_rows()
