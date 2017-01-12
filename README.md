@@ -466,6 +466,29 @@ Return Values
 
 A array structure for the row. NULL if there are no more rows to retrieve or if an error occurred.
 
+## mysql_field_count()
+
+```js
+db.mysql_real_query("SELECT * FROM pet");
+var res = db.mysql_store_result();
+
+console.log(db.mysql_field_count());
+
+```
+Description
+
+Returns the number of columns for the most recent query on the connection.
+
+The normal use of this function is when mysql_store_result() returned NULL (and thus you have no result set pointer). In this case, you can call mysql_field_count() to determine whether mysql_store_result() should have produced a nonempty result. This enables the client program to take proper action without knowing whether the query was a SELECT (or SELECT-like) statement. The example shown here illustrates how this may be done.
+
+See Section 26.8.15.1, “Why mysql_store_result() Sometimes Returns NULL After mysql_query() Returns Success”.
+
+Return Values
+
+An integer representing the number of columns in a result set.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-field-count.html
+
 
 
 
