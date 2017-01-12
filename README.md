@@ -512,5 +512,155 @@ Return Values
 None.
 
 
+## mysql_get_character_set_info()
+
+```js
+
+   var cs = db.mysql_get_character_set_info();
+    
+    console.log("character set+collation number: " + cs.number);
+    console.log("character set name: " + cs.name);
+    console.log("collation name: " +cs.csname);
+    console.log("comment: " +cs.comment);
+    console.log("directory: " +cs.dir);
+    console.log("multi byte character min. length: "+ cs.mbminlen);
+    console.log("multi byte character max. length: "+ cs.mbmaxlen);
+
+```
+
+Description
+
+This function provides information about the default client character set. The default character set may be changed with the mysql_set_character_set() function.
 
 
+## mysql_get_client_info()
+
+```js
+var version = db.mysql_get_client_info()
+```
+Description
+
+Returns a string that represents the MySQL client library version; for example, "5.7.18".
+
+Return Values
+
+A character string that represents the MySQL client library version.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-get-client-info.html
+
+## mysql_get_client_version()
+
+```js
+var version =  db.mysql_get_client_version()
+```
+Description
+
+Returns an integer that represents the MySQL client library version. The value has the format XYYZZ where X is the major version, YY is the release level (or minor version), and ZZ is the sub-version within the release level:
+
+For example, "5.7.18" is returned as 50718.
+
+Return Values
+
+An integer that represents the MySQL client library version.
+
+## mysql_get_host_info()
+
+```js
+var host = db.mysql_get_host_info();
+```
+
+Description
+
+Returns a string describing the type of connection in use, including the server host name.
+
+Return Values
+
+A character string representing the server host name and the connection type.
+
+## mysql_get_proto_info()
+
+```js
+var proto_info =  db.mysql_get_proto_info();
+```
+
+Description
+
+Returns the protocol version used by current connection.
+
+Return Values
+
+An unsigned integer representing the protocol version used by the current connection.
+
+
+## mysql_get_server_info()
+
+```js
+var server = db.mysql_get_server_info();
+```
+
+Description
+
+Returns a string that represents the MySQL server version; for example, "5.7.18".
+
+Return Values
+
+A character string that represents the MySQL server version.
+
+
+## mysql_get_server_version()
+
+```js
+var server_v = db.mysql_get_server_version();
+```
+
+Description
+
+Returns an integer that represents the MySQL server version. The value has the format XYYZZ where X is the major version, YY is the release level (or minor version), and ZZ is the sub-version within the release level:
+
+For example, "5.7.18" is returned as 50718.
+
+This function is useful in client programs for determining whether some version-specific server capability exists.
+
+Return Values
+
+An integer that represents the MySQL server version
+
+## mysql_get_ssl_cipher()
+
+```js
+var chiper = db.mysql_get_ssl_cipher();
+```
+
+Description
+
+mysql_get_ssl_cipher() returns the encryption cipher used for the given connection to the server. mysql is the connection handler returned from mysql_init().
+
+Return Values
+
+A string naming the encryption cipher used for the connection, or NULL if no cipher is being used.
+
+## mysql_info()
+
+```js
+var info = db.mysql_info();
+```
+
+Description
+
+Retrieves a string providing information about the most recently executed statement, but only for the statements listed here. For other statements, mysql_info() returns NULL. The format of the string varies depending on the type of statement, as described here. The numbers are illustrative only; the string contains values appropriate for the statement.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-info.html
+
+## mysql_insert_id()
+
+```js
+db.mysql_real_query(INSERT INTO pet (name) VALUE ('dog'));
+var insert_ID =  db.mysql_insert_id);
+```
+
+Description
+
+Returns the value generated for an AUTO_INCREMENT column by the previous INSERT or UPDATE statement. Use this function after you have performed an INSERT statement into a table that contains an AUTO_INCREMENT field, or have used INSERT or UPDATE to set a column value with LAST_INSERT_ID(expr).
+
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-insert-id.html
