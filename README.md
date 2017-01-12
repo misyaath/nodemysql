@@ -490,5 +490,27 @@ An integer representing the number of columns in a result set.
 See https://dev.mysql.com/doc/refman/5.7/en/mysql-field-count.html
 
 
+## mysql_free_result()
+
+```js
+
+db.mysql_real_query("SELECT * FROM pet");
+var res = db.mysql_store_result();
+var row = db.mysql_fetch_row();
+
+db.mysql_free_result()
+
+```
+Description
+
+Frees the memory allocated for a result set by mysql_store_result(), mysql_use_result(), mysql_list_dbs(), and so forth. When you are done with a result set, you must free the memory it uses by calling mysql_free_result().
+
+Do not attempt to access a result set after freeing it.
+
+Return Values
+
+None.
+
+
 
 
