@@ -32,6 +32,12 @@
   - [mysql_get_host_info()](#mysql_get_host_info())
   - [mysql_get_proto_info()](#mysql_get_proto_info())
   - [mysql_get_server_info()](#mysql_get_server_info())
+  - [mysql_get_ssl_cipher()](#mysql_get_ssl_cipher())
+  - [mysql_info()](#mysql_info())
+  - [mysql_insert_id()](#mysql_insert_id())
+  - [mysql_more_results()](#mysql_more_results())
+  - [mysql_num_fields()](#mysql_num_fields())
+  -[mysql_num_rows()](#mysql_num_rows())
 
 
 
