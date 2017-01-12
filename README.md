@@ -35,7 +35,6 @@
  - [mysql_get_ssl_cipher()](#mysql_get_ssl_cipher)
  - [mysql_info()](#mysql_info)
  - [mysql_insert_id()](#mysql_insert_id)
- - [mysql_more_results()](#mysql_more_results)
  - [mysql_num_fields()](#mysql_num_fields)
  - [mysql_num_rows()](#mysql_num_rows)
  - [mysql_real_query()](#mysql_real_query)
@@ -664,3 +663,47 @@ Returns the value generated for an AUTO_INCREMENT column by the previous INSERT 
 
 
 See https://dev.mysql.com/doc/refman/5.7/en/mysql-insert-id.html
+
+## mysql_num_fields()
+
+```js
+var fields =  db.mysql_num_fields();
+```
+
+Description
+
+Returns the number of columns in a result set.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-num-fields.html
+
+## mysql_ping()
+
+```js
+var ping  = db.mysql_ping()
+```
+
+Description
+
+Checks whether the connection to the server is working. If the connection has gone down and auto-reconnect is enabled an attempt to reconnect is made. If the connection is down and auto-reconnect is disabled, mysql_ping() returns an error.
+
+Auto-reconnect is disabled by default. To enable it, call mysql_options() with the MYSQL_OPT_RECONNECT option
+
+Return Values
+
+True if the connection to the server is active. False if an error occurred. A False return does not indicate whether the MySQL server itself is down; the connection might be broken for other reasons such as network problems.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-ping.html
+
+## mysql_query()
+
+```js
+
+ db.mysql_query(stmt_str);
+ 
+```
+Description
+
+Executes the SQL statement pointed to by the null-terminated string stmt_str. Normally, the string must consist of a single SQL statement without a terminating semicolon (;) or \g. If multiple-statement execution has been enabled, the string can contain several statements separated by semicolons. 
+mysql_query() cannot be used for statements that contain binary data; you must use mysql_real_query() instead. (Binary data may contain the \0 character, which mysql_query() interprets as the end of the statement string.)
+
+
