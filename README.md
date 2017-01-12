@@ -135,3 +135,13 @@ When establishing a connection, you can set the following options:
 ## Function Descriptions
 
 ## mysql_affected_rows()
+
+```js
+var effected_rows = db.mysql_affected_rows();
+```
+
+Description
+
+mysql_affected_rows() may be called immediately after executing a statement with mysql_query() or mysql_real_query(). It returns the number of rows changed, deleted, or inserted by the last statement if it was an UPDATE, DELETE, or INSERT. For SELECT statements, mysql_affected_rows() works like mysql_num_rows(). Further [mysql_affected_rows](#https://dev.mysql.com/doc/refman/5.7/en/mysql-affected-rows.html)
+
+
