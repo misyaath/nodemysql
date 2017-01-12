@@ -156,7 +156,7 @@ db.mysql_autocommit(int mode)
 Description
 
 Sets autocommit mode on if mode is 1, off if mode is 0. 
-Further [mysql_autocommit](#https://dev.mysql.com/doc/refman/5.7/en/mysql-autocommit.html)
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-autocommit.html
 
 Return Values
 
@@ -174,7 +174,7 @@ Description
 Changes the user and causes the database specified by db to become the default (current) database on the connection specified by mysql. In subsequent queries, this database is the default for table references that include no explicit database specifier.
 
 mysql_change_user() fails if the connected user cannot be authenticated or does not have permission to use the database. In this case, the user and database are not changed. 
-Further [mysql_change_user](#https://dev.mysql.com/doc/refman/5.7/en/mysql-change-user.html)
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-change-user.html
 
 Return Values
 
@@ -187,7 +187,8 @@ string = db.mysql_character_set_name();
 ```
 Description
 
-Returns the default character set name for the current connection. Further[mysql_character_set_name](#https://dev.mysql.com/doc/refman/5.7/en/mysql-character-set-name.html)
+Returns the default character set name for the current connection. 
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-character-set-name.html
 
 Return Values
 
