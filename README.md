@@ -83,7 +83,7 @@ console.log("Error: " + db.mysql_error() + " Error No: " + mysql_errno())
 When establishing a connection, you can set the following options:
 
 * `host`: The hostname of the database you are connecting to. (Default:
-  `localhost` for Linux generic "127.0.0.1")
+  `localhost` for Linux generic `"127.0.0.1"`)
 * `port`: The port number to connect to. (Default: `3306`)(Optional),
 * `socket`: The source IP address to use for TCP connection. (Optional)
 * `username`: The MySQL user to authenticate as.
