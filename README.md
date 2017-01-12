@@ -134,4 +134,4 @@ When establishing a connection, you can set the following options:
 
 ## Function Descriptions
 
-   ## mysql_affected_rows()
+## mysql_affected_rows()
