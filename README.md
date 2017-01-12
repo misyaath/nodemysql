@@ -707,3 +707,27 @@ Executes the SQL statement pointed to by the null-terminated string stmt_str. No
 mysql_query() cannot be used for statements that contain binary data; you must use mysql_real_query() instead. (Binary data may contain the \0 character, which mysql_query() interprets as the end of the statement string.)
 
 
+## mysql_real_escape_string()
+
+```js
+var str =  db.mysql_real_escape_string(str);
+```
+
+Description
+
+This function creates a legal SQL string for use in an SQL statement
+The mysql argument must be a valid, open connection because character escaping depends on the character set in use by the server.
+
+see https://dev.mysql.com/doc/refman/5.7/en/mysql-real-escape-string.html
+
+## mysql_real_query()
+
+```js 
+db.mysql_real_query(stmt_str);
+```
+Description
+
+Executes the SQL statement pointed to by stmt_str, a string length bytes long. Normally, the string must consist of a single SQL statement without a terminating semicolon (;) or \g. If multiple-statement execution has been enabled, the string can contain several statements separated by semicolons
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-real-query.html
+
