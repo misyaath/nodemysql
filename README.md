@@ -817,4 +817,87 @@ Returns a null-terminated string containing the SQLSTATE error code for the most
 
 See https://dev.mysql.com/doc/refman/5.7/en/mysql-sqlstate.html
 
+## mysql_ssl_set()
+
+```js
+db.mysql_ssl_set(key,cert,ca,capath,cipher);
+```
+Description
+
+mysql_ssl_set() is used for establishing secure connections using SSL. It must be called before mysql_real_connect().
+mysql_ssl_set() does nothing unless SSL support is enabled in the client library.
+
+- `key`: The path name to the key file
+- `cert`: The path name to the certificate file
+- `ca`: The path name to the certificate authority file
+- `capath`: The path name to a directory that contains trusted SSL CA certificates in PEM format
+- `cipher`: A list of permissible ciphers to use for SSL encryption
+
+Return Values
+
+This function returns true. If SSL setup is incorrect return false, mysql_real_connect() returns an error when you attempt to connect.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-ssl-set.html
+
+## mysql_stat()
+
+db.mysql_stat();
+
+Description
+
+Returns a character string containing information similar to that provided by the mysqladmin status command. This includes uptime in seconds and the number of running threads, questions, reloads, and open tables.
+
+Return Values
+
+A character string describing the server status. 
+
+## mysql_store_result()
+
+```js
+db.mysql_store_result();
+```
+
+Description
+
+After invoking mysql_query() or mysql_real_query(), you must call mysql_store_result() or mysql_use_result() for every statement that successfully produces a result set (SELECT, SHOW, DESCRIBE, EXPLAIN, CHECK TABLE, and so forth). You must also call mysql_free_result() after you are done with the result set.
+
+You need not call mysql_store_result() or mysql_use_result() for other statements, but it does not do any harm or cause any notable performance degradation if you call mysql_store_result() in all cases. You can detect whether the statement has a result set by checking whether mysql_store_result() returns a nonzero value (more about this later).
+
+Return Values
+
+If success retrun nothing if result set NULL it return Mysql Error message or Mysql affected rows 
+
+## mysql_use_result()
+
+```js
+db.mysql_use_result();
+```
+
+Description
+
+After invoking mysql_query() or mysql_real_query(), you must call mysql_store_result() or mysql_use_result() for every statement that successfully produces a result set (SELECT, SHOW, DESCRIBE, EXPLAIN, CHECK TABLE, and so forth). You must also call mysql_free_result() after you are done with the result set.
+
+mysql_use_result() initiates a result set retrieval but does not actually read the result set into the client like mysql_store_result() does. Instead, each row must be retrieved individually by making calls to mysql_fetch_row(). This reads the result of a query directly from the server without storing it in a temporary table or local buffer, which is somewhat faster and uses much less memory than mysql_store_result(). The client allocates memory only for the current row and a communication buffer that may grow up to max_allowed_packet bytes.
+
+On the other hand, you should not use mysql_use_result() for locking reads if you are doing a lot of processing for each row on the client side, or if the output is sent to a screen on which the user may type a ^S (stop scroll). This ties up the server and prevent other threads from updating any tables from which the data is being fetched.
+
+Return Values
+
+True if not NULL. False if an error occurred.
+
+See https://dev.mysql.com/doc/refman/5.7/en/mysql-use-result.html
+
+## mysql_warning_count()
+
+```js
+db.mysql_warning_count();
+```
+
+Description
+
+Returns the number of errors, warnings, and notes generated during execution of the previous SQL statement.
+
+Return Values
+
+The warning count.
 
