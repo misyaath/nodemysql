@@ -48,6 +48,13 @@
   - [mysql_ssl_set()](#mysql_ssl_set())
   - [mysql_stat()](#mysql_stat())
   - [mysql_use_result()](#mysql_use_result())
+  - [mysql_warning_count()]
+  - [mysql_change_user()](#mysql_change_user())
+  - [mysql_fetch_lengths()](#mysql_fetch_lengths())
+  - [mysql_autocommit()](#mysql_autocommit())
+  - [mysql_real_escape_string()](#mysql_real_escape_string())
+  - [mysql_ping()](#mysql_ping())
+  - [mysql_multiple_statement()](#mysql_multiple_statement())
   
 
 
