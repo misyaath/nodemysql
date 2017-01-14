@@ -935,7 +935,46 @@ To enable multiple-statement execution and result processing, the following opti
 
   -`171`(CLIENT_MULTI_RESULTS) enables the client program to process multiple results. This option must be enabled if you execute CALL   statements for stored procedures that produce result sets. Otherwise, such procedures result in an error Error 1312 (0A000): PROCEDURE proc_name can't return a result set in the given context. In MySQL 5.7, CLIENT_MULTI_RESULTS is enabled by default.
  	
-  -`161` (CLIENT_MULTI_STATEMENTS) enables mysql_query() and mysql_real_query() to execute statement strings containing multiple statements separ1ated by semicolons. This option also enables CLIENT_MULTI_RESULTS implicitly, so a flags argument of CLIENT_MULTI_STATEMENTS to mysql_real_connect() is equivalent to an argument of CLIENT_MULTI_STATEMENTS | CLIENT_MULTI_RESULTS. That is, CLIENT_MULTI_STATEMENTS is sufficient to enable multiple-statement execution and all multiple-result processing.
+  -`161` (CLIENT_MULTI_STATEMENTS) enables mysql_query() and mysql_real_query() to execute statement strings containing multiple statements separ1ated by semicolons. This option also enables CLIENT_MULTI_RESULTS implicitly, so a flags argument of CLIENT_MULTI_STATEMENTS to mysql_real_connect() is equivalent to an argument of [171,161]. That is, [161] is sufficient to enable multiple-statement execution and all multiple-result processing.
 
+```js
 
+var mysql = require("nodemysql");
+
+var db = mysql.connect({
+    host: "127.0.0.1",
+    username: "username",
+    password: "",
+    database: "test",
+    flag: [161]
+})
+
+db.mysql_real_query("SELECT * FROM pet WHERE name = 'PEACOCK';\  INSERT INTO pet (name,owner) VALUE ('PEACOCK','zuckerburk')");
+
+var result = db.mysql_multiple_statement();
+console.log(result);
+
+result Will be  -------------------------------------------------------------------------------------
+
+[ RESULT: [ { name: 'DOG',
+      owner: 'NULL',
+      species: 'NULL',
+      sex: 'NULL',
+      birth: 'NULL',
+      death: 'NULL' },
+    { name: 'DOG',
+      owner: 'NULL',
+      species: 'NULL',
+      sex: 'NULL',
+      birth: 'NULL',
+      death: 'NULL' },
+    { name: 'DOG',
+      owner: 'NULL',
+      species: 'NULL',
+      sex: 'NULL',
+      birth: 'NULL',
+      death: 'NULL' } ],
+  AFFECTED_ROWS: 1 ]
+
+```
 
