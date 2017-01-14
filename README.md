@@ -910,3 +910,14 @@ The value of client_flag is usually 0, but can be set to a combination of the fo
 | Flag Name           | Flag Description                                                                                               |
   ------------------- | ----------------------------------------------------------------------------------------------------------------
 | 32 `CLIENT_COMPRESS`| Use compression in the client/server protocol.    							       |
+| 2 `CLIENT_FOUND_ROWS`|Return the number of found (matched) rows, not the number of changed rows.                                     |
+| 4096 `CLIENT_IGNORE_SIGPIPE`|	Prevents the client library from installing a SIGPIPE signal handler. This can be used to avoid 					conflicts with a handler that the application has already installed.     			       |
+| 256 `CLIENT_IGNORE_SPACE`|	Permit spaces after function names. Makes all functions names reserved words.			       |
+| 1024 `CLIENT_INTERACTIVE`|	Permit interactive_timeout seconds of inactivity (rather than wait_timeout seconds) before closing the 					connection. The client's session wait_timeout variable is set to the value of the session 					    	interactive_timeout variable.
+| 128 `CLIENT_LOCAL_FILES` |
+| 171 `CLIENT_MULTI_RESULTS`|
+| 161 `CLIENT_MULTI_STATEMENTS`|
+| 16 `CLIENT_NO_SCHEMA` |
+| 64 `CLIENT_ODBC` |
+| 2048 `CLIENT_SSL` |
+| 311 `CLIENT_REMEMBER_OPTIONS` |
