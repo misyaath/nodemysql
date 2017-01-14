@@ -914,10 +914,10 @@ The value of client_flag is usually 0, but can be set to a combination of the fo
 | 4096 `CLIENT_IGNORE_SIGPIPE`|	Prevents the client library from installing a SIGPIPE signal handler. This can be used to avoid 					conflicts with a handler that the application has already installed.     			       |
 | 256 `CLIENT_IGNORE_SPACE`|	Permit spaces after function names. Makes all functions names reserved words.			       |
 | 1024 `CLIENT_INTERACTIVE`|	Permit interactive_timeout seconds of inactivity (rather than wait_timeout seconds) before closing the 					connection. The client's session wait_timeout variable is set to the value of the session 					    	interactive_timeout variable.
-| 128 `CLIENT_LOCAL_FILES` |
-| 171 `CLIENT_MULTI_RESULTS`|
-| 161 `CLIENT_MULTI_STATEMENTS`|
-| 16 `CLIENT_NO_SCHEMA` |
-| 64 `CLIENT_ODBC` |
-| 2048 `CLIENT_SSL` |
-| 311 `CLIENT_REMEMBER_OPTIONS` |
+| 128 `CLIENT_LOCAL_FILES` |	Enable LOAD DATA LOCAL handling.
+| 171 `CLIENT_MULTI_RESULTS`| 	Tell the server that the client can handle multiple result sets from multiple-statement executions or 					stored procedures. This flag is automatically enabled if CLIENT_MULTI_STATEMENTS is enabled. See the 					note following this table for more information about this flag.
+| 161 `CLIENT_MULTI_STATEMENTS`|Tell the server that the client may send multiple statements in a single string (separated by ; 					characters). If this flag is not set, multiple-statement execution is disabled. See the note following 					this table for more information about this flag.
+| 16 `CLIENT_NO_SCHEMA`       |Do not permit db_name.tbl_name.col_name syntax. This is for ODBC. It causes the parser to generate an 					error if you use that syntax, which is useful for trapping bugs in some ODBC programs.
+| 64 `CLIENT_ODBC` |		Unused.
+| 2048 `CLIENT_SSL` |		Use SSL (encrypted protocol). Do not set this option within an application program; it is set internally 				in the client library. Instead, use mysql_ssl_set() before calling mysql_real_connect().
+| 311 `CLIENT_REMEMBER_OPTIONS` |Remember options specified by calls to mysql_options(). Without this option, if mysql_real_connect() 					fails, you must repeat the mysql_options() calls before trying to connect again. With this option, the 					mysql_options() calls need not be repeated.
