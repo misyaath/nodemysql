@@ -56,6 +56,7 @@
  - [mysql_multiple_statement()](#mysql_multiple_statement)
  
 - [Connection Flags](#connection-flags)
+- [Multiple Statement Execution](#multiple_statement_execution)
   
 
 
@@ -921,3 +922,20 @@ The value of client_flag is usually 0, but can be set to a combination of the fo
 | 64 `CLIENT_ODBC` |		Unused.
 | 2048 `CLIENT_SSL` |		Use SSL (encrypted protocol). Do not set this option within an application program; it is set internally 				in the client library. Instead, use mysql_ssl_set() before calling mysql_real_connect().
 | 311 `CLIENT_REMEMBER_OPTIONS` |Remember options specified by calls to mysql_options(). Without this option, if mysql_real_connect() 					fails, you must repeat the mysql_options() calls before trying to connect again. With this option, the 					mysql_options() calls need not be repeated.
+
+## Multiple Statement Execution
+
+By default, mysql_query() and mysql_real_query() interpret their statement string argument as a single statement to be executed, and you process the result according to whether the statement produces a result set (a set of rows, as for SELECT) or an affected-rows count (as for INSERT, UPDATE, and so forth).
+
+MySQL also supports the execution of a string containing multiple statements separated by semicolon (;) characters. This capability is enabled by special options that are specified either when you connect to the server with mysql_real_connect() or after connecting by calling` mysql_set_server_option().
+
+To enable multiple-statement execution and result processing, the following options may be used:
+
+- The mysql_real_connect() function has a flags argument for which two option values are relevant:
+
+  -`171`(CLIENT_MULTI_RESULTS) enables the client program to process multiple results. This option must be enabled if you execute CALL   statements for stored procedures that produce result sets. Otherwise, such procedures result in an error Error 1312 (0A000): PROCEDURE proc_name can't return a result set in the given context. In MySQL 5.7, CLIENT_MULTI_RESULTS is enabled by default.
+ 	
+  -`161` (CLIENT_MULTI_STATEMENTS) enables mysql_query() and mysql_real_query() to execute statement strings containing multiple statements separ1ated by semicolons. This option also enables CLIENT_MULTI_RESULTS implicitly, so a flags argument of CLIENT_MULTI_STATEMENTS to mysql_real_connect() is equivalent to an argument of CLIENT_MULTI_STATEMENTS | CLIENT_MULTI_RESULTS. That is, CLIENT_MULTI_STATEMENTS is sufficient to enable multiple-statement execution and all multiple-result processing.
+
+
+
