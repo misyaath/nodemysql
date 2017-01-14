@@ -54,6 +54,8 @@
  - [mysql_real_escape_string()](#mysql_real_escape_string)
  - [mysql_ping()](#mysql_ping)
  - [mysql_multiple_statement()](#mysql_multiple_statement)
+ 
+- [Connection Flags](#connection-flags)
   
 
 
@@ -901,3 +903,10 @@ Return Values
 
 The warning count.
 
+## Connection Flags
+
+The value of client_flag is usually 0, but can be set to a combination of the following flags to enable certain features.
+
+| Flag Name           | Flag Description                                                                                               |
+  ------------------- | ----------------------------------------------------------------------------------------------------------------
+| 32 `CLIENT_COMPRESS`| Use compression in the client/server protocol.    							       |
